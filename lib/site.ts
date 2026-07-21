@@ -1,1 +1,1 @@
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://coastline-weather-xoaf.vercel.app";
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://baybeachweather.vercel.app";

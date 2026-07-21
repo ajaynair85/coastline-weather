@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { beaches, getBeach } from "@/lib/beaches";
+import { beaches, beachPath, getBeach } from "@/lib/beaches";
 import { getBeachWeather } from "@/lib/weather";
 import { getCurrentUser, getSubscription } from "@/lib/auth";
 import { siteUrl } from "@/lib/site";
@@ -19,8 +19,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title,
     description: `Live ${beach.name} air temperature, wind, water temperature, wave height, seven-day outlook, and coastal camera.`,
-    alternates: { canonical: `${siteUrl}/beaches/${beach.slug}` },
-    openGraph: { title, description: beach.description, url: `${siteUrl}/beaches/${beach.slug}` },
+    alternates: { canonical: `${siteUrl}${beachPath(beach)}` },
+    openGraph: { title, description: beach.description, url: `${siteUrl}${beachPath(beach)}` },
   };
 }
 
@@ -32,7 +32,7 @@ export default async function BeachPage({ params }: { params: Promise<{ slug: st
   const unlocked = Boolean(subscription);
   const jsonLd = {
     "@context": "https://schema.org", "@type": "WebPage", name: `${beach.name} beach weather`, description: beach.description,
-    url: `${siteUrl}/beaches/${beach.slug}`, isAccessibleForFree: true,
+    url: `${siteUrl}${beachPath(beach)}`, isAccessibleForFree: true,
     about: { "@type": "Beach", name: beach.name, geo: { "@type": "GeoCoordinates", latitude: beach.latitude, longitude: beach.longitude } },
     hasPart: { "@type": "WebPageElement", isAccessibleForFree: false, cssSelector: ".member-forecast" },
   };

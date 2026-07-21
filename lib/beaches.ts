@@ -39,3 +39,7 @@ export const bayAreaBeaches = beaches.filter((beach) => beach.region === "Bay Ar
 export function getBeach(slug: string) {
   return beaches.find((beach) => beach.slug === slug);
 }
+
+export function beachPath(beach: Beach) {
+  return beach.slug === "pacifica-state-beach" ? "/pacifica" : `/beaches/${beach.slug}`;
+}
