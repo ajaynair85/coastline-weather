@@ -37,6 +37,8 @@ const zipAnchors: Record<string, string> = {
   "940": "Pacifica State Beach", "941": "Baker Beach", "949": "Rodeo Beach", "950": "Santa Cruz", "939": "Monterey Bay", "934": "Pismo Beach", "900": "Venice Beach", "902": "Venice Beach", "904": "Santa Monica", "926": "Huntington Beach", "920": "La Jolla Cove", "921": "La Jolla Cove", "955": "Crescent City",
 };
 
+const bayAreaBeaches = beaches.filter((beach) => beach.region === "Bay Area");
+
 export default function Home() {
   const [region, setRegion] = useState("Bay Area");
   const [zoom, setZoom] = useState(1);
@@ -78,6 +80,7 @@ export default function Home() {
 
       <section className="explorer" id="conditions"><div className="section-head"><div><p className="eyebrow">Explore the shoreline</p><h2>Pick a region. Zoom the coast.</h2></div><div className="map-tools" aria-label="Map zoom controls"><button onClick={() => setZoom(Math.max(0.8, zoom - 0.15))} aria-label="Zoom out">−</button><span>{Math.round(zoom * 100)}%</span><button onClick={() => setZoom(Math.min(1.7, zoom + 0.15))} aria-label="Zoom in">+</button></div></div>
         <div className="region-tabs" aria-label="California coast regions">{["Bay Area", "All coast", "North Coast", "Central Coast", "Los Angeles", "Orange County", "San Diego"].map((item) => <button className={region === item ? "active" : ""} key={item} onClick={() => setRegion(item)}>{item}</button>)}</div>
+        {region === "Bay Area" && <div className="bay-beach-picker" aria-label="Bay Area beaches"><span>Bay Area beaches</span>{bayAreaBeaches.map((beach) => <button className={activeBeach === beach.name ? "active" : ""} key={beach.name} onClick={() => setActiveBeach(beach.name)}>{beach.name}</button>)}</div>}
         <div className="map-and-feature"><div className="map-frame"><div className="ca-map" style={{ transform: `scale(${zoom})` }} aria-label="Stylized California coastline map">{beaches.map((beach, index) => <button key={beach.name} className={`map-pin pin-${index} ${activeBeach === beach.name ? "selected" : ""}`} onClick={() => { setActiveBeach(beach.name); setRegion(beach.region); }} aria-label={`Show ${beach.name}`}>{index + 1}</button>)}</div><p className="map-caption">Tap a numbered coast stop to see its conditions.</p></div>
           <article className="feature-card"><p className="eyebrow">Highlighted beach</p><h3>{selected.name}</h3><div className="feature-temp">{selected.temp}° <span>{selected.status} for a beach day</span></div><div className="metrics"><div><b>Water</b><span>{selected.water}°</span></div><div><b>Wind</b><span>{selected.wind}</span></div><div><b>Surf</b><span>{selected.surf}</span></div></div><a className="cam-link" href={selected.cam} target="_blank" rel="noreferrer">Open available live camera <span>↗</span></a></article></div>
       </section>
