@@ -1,0 +1,3 @@
+import Link from "next/link";
+export const metadata = { title: "Terms | Coastline" };
+export default function TermsPage() { return <main className="legal-page"><Link className="brand" href="/">COASTLINE<span>°</span></Link><h1>Terms</h1><p>Coastline provides weather and marine forecasts for general planning only. It is not a marine-navigation or emergency-safety service. Always follow official alerts and local lifeguard guidance.</p><p>Coastline Plus renews monthly after the stated trial unless canceled. Members can manage or cancel billing from their account page.</p><Link href="/">← Back to Coastline</Link></main>; }

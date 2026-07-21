@@ -1,0 +1,3 @@
+import Link from "next/link";
+export const metadata = { title: "Privacy | Coastline" };
+export default function PrivacyPage() { return <main className="legal-page"><Link className="brand" href="/">COASTLINE<span>°</span></Link><h1>Privacy</h1><p>Coastline uses account information to provide member access and Stripe to process payments. Payment card details are handled by Stripe and are not stored by Coastline.</p><p>Weather pages may use essential session cookies for sign-in. Contact the site owner to request account deletion or access to stored account information.</p><Link href="/">← Back to Coastline</Link></main>; }
