@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { VisitorCounter } from "@/components/visitor-counter";
 import { bayAreaBeaches, beaches, beachPath } from "@/lib/beaches";
 import type { BeachWeather } from "@/lib/weather";
 
@@ -65,7 +66,7 @@ export default function Home() {
 
       <section className="cams" id="cameras"><div><p className="eyebrow">Live views</p><h2>See the Bay Area coast before you go.</h2><p>Every Bay Area beach has a working camera link. Where no dependable beach-specific feed exists, the link is clearly labeled as a nearby coastal camera.</p></div><div className="cam-list">{bayAreaBeaches.map((beach) => <a href={beach.cam} key={beach.name} target="_blank" rel="noreferrer"><span className="cam-dot" />{beach.name}<b>{beach.camLabel ?? "Open camera"} ↗</b></a>)}</div></section>
       <section className="bottom-search"><div><p className="eyebrow">Bay Area beach finder</p><h2>Find your nearest coast.</h2></div><div><form className="zip-search" onSubmit={searchZip}><label htmlFor="zip">Enter a ZIP code</label><div><input id="zip" value={zip} onChange={(event) => setZip(event.target.value.replace(/\D/g, "").slice(0, 5))} placeholder="Try a Bay Area ZIP" inputMode="numeric" /><button type="submit">Search</button></div></form><p className="search-note" role="status">{message}</p></div></section>
-      <footer><a className="brand" href="#top">COASTLINE<span>°</span></a><p>For beach planning, not marine safety. Check local alerts before entering the water.</p></footer>
+      <footer><a className="brand" href="#top">COASTLINE<span>°</span></a><div className="footer-meta"><p>For beach planning, not marine safety. Check local alerts before entering the water.</p><VisitorCounter /></div></footer>
     </main>
   );
 }

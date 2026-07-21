@@ -34,3 +34,9 @@ a { color: inherit; text-decoration: none; }
 .legal-page { max-width:720px; margin:60px auto; padding:32px; line-height:1.7; }.legal-page h1 { margin:80px 0 25px; font:500 70px Georgia,serif; }.legal-page p { color:#527476; }.legal-page > a:last-child { display:block; margin-top:45px; color:var(--sea); font-weight:800; }
 @media(max-width:900px){.directory-grid { grid-template-columns:repeat(2,1fr); }.forecast-grid { grid-template-columns:repeat(4,1fr); }.current-panel { margin-left:24px; margin-right:24px; }.simple-nav { align-items:flex-start; }.nav div { gap:13px; }}
 @media(max-width:650px){.simple-nav > div { gap:12px; font-size:11px; }.directory-grid,.current-panel,.paywall-card,.price-card { grid-template-columns:1fr; }.directory-grid { padding-left:20px; padding-right:20px; }.beach-hero,.beach-info,.forecast-heading { align-items:flex-start; flex-direction:column; }.current-panel > dl { padding:30px; }.forecast-grid { grid-template-columns:repeat(2,1fr); }.auth-card,.account-card,.price-card { margin:30px 18px; padding:28px; }.auth-card h1,.account-card h1 { font-size:46px; }.nav a[href="/sign-in"] { display:none; }}
+
+/* Quiet, privacy-friendly visitor count */
+.footer-meta { display:flex; justify-content:flex-end; align-items:center; gap:16px; text-align:right; }
+.visitor-counter { display:inline-flex; align-items:center; gap:7px; flex:none; padding:7px 10px; border:1px solid var(--line); border-radius:100px; background:#fffdf6; color:#456f70; font-size:10px; font-weight:800; letter-spacing:.04em; }
+.visitor-counter i { width:7px; height:7px; border-radius:50%; background:#56a89c; box-shadow:0 0 0 3px #56a89c1f; }
+@media(max-width:800px){.footer-meta { align-items:flex-start; flex-direction:column; text-align:left; }}
