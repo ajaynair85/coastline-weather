@@ -3,6 +3,24 @@ import { NextResponse } from "next/server";
 
 const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
+function cleanLocation(value: string | null) {
+  if (!value) return null;
+
+  try {
+    return decodeURIComponent(value).trim().slice(0, 120) || null;
+  } catch {
+    return value.trim().slice(0, 120) || null;
+  }
+}
+
+function getApproximateLocation(request: Request) {
+  return {
+    city: cleanLocation(request.headers.get("x-vercel-ip-city")),
+    region: cleanLocation(request.headers.get("x-vercel-ip-country-region")),
+    country: cleanLocation(request.headers.get("x-vercel-ip-country")),
+  };
+}
+
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
@@ -28,7 +46,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid visitor identifier" }, { status: 400 });
   }
 
-  const { data, error } = await supabase.rpc("record_site_visit", { p_visitor_id: body.visitorId });
+  const location = getApproximateLocation(request);
+  const { data, error } = await supabase.rpc("record_site_visit", {
+    p_visitor_id: body.visitorId,
+    p_city: location.city,
+    p_region: location.region,
+    p_country: location.country,
+  });
   if (error) return NextResponse.json({ error: "Visitor count is unavailable" }, { status: 503 });
 
   return NextResponse.json({ count: Number(data) }, { headers: { "cache-control": "no-store" } });
