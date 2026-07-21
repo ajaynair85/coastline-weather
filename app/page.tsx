@@ -70,7 +70,7 @@ export default function Home() {
       <section className="hero">
         <nav className="nav"><a className="brand" href="#top">COASTLINE<span>°</span></a><div><a href="#conditions">Conditions</a><a href="#cameras">Live cams</a></div></nav>
         <div className="hero-grid" id="top">
-          <div className="hero-copy"><p className="eyebrow">California beach weather</p><h1>The coast,<br /><em>at a glance.</em></h1><p className="lede">Plan a salt-air day with beach-by-beach temperatures, wind, surf and public live cameras along California&apos;s 840-mile shore.</p>
+          <div className="hero-copy"><p className="eyebrow">California beach weather</p><h1>The coast,<br /><em>at a glance for Meagan.</em></h1><p className="lede">Plan a salt-air day with beach-by-beach temperatures, wind, surf and public live cameras along California&apos;s 840-mile shore.</p>
             <form className="zip-search" onSubmit={searchZip}><label htmlFor="zip">Find your nearest coast</label><div><input id="zip" value={zip} onChange={(event) => setZip(event.target.value.replace(/\D/g, "").slice(0, 5))} placeholder="Try a Bay Area ZIP" inputMode="numeric" /><button type="submit">Search</button></div></form>
             <p className="search-note" role="status">{message}</p>
           </div>
